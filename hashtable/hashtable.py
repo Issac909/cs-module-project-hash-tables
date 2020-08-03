@@ -54,7 +54,7 @@ class HashTable:
         encoded_byte = key.encode()
         hash = 2325
         for i in encoded_byte:
-            hash = hash ^ octet_of_data
+            hash = hash ^ encoded_byte
             hash = hash * FNV_prime
             
         return hash
