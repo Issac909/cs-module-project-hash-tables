@@ -7,10 +7,8 @@ class HashTableEntry:
         self.value = value
         self.next = None
 
-
 # Hash table can't have fewer than this many slots
 MIN_CAPACITY = 8
-
 
 class HashTable:
     """
@@ -22,7 +20,8 @@ class HashTable:
 
     def __init__(self, capacity):
         # Your code here
-
+        self.capacity = MIN_CAPACITY
+        self.hash_table = [None] * self.capacity
 
     def get_num_slots(self):
         """
@@ -35,7 +34,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
-
+        pass
 
     def get_load_factor(self):
         """
@@ -44,7 +43,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
-
+        pass
 
     def fnv1(self, key):
         """
@@ -52,9 +51,13 @@ class HashTable:
 
         Implement this, and/or DJB2.
         """
-
-        # Your code here
-
+        encoded_byte = key.encode()
+        hash = 2325
+        for i in encoded_byte:
+            hash = hash ^ octet_of_data
+            hash = hash * FNV_prime
+            
+        return hash
 
     def djb2(self, key):
         """
@@ -62,7 +65,15 @@ class HashTable:
 
         Implement this, and/or FNV-1.
         """
+        
         # Your code here
+        encoded_byte = key.encode()
+        hash = 5381
+        for i in encoded_byte:
+            hash = hash * 33 + i
+            hash &= 0xffffffff
+            
+        return hash
 
 
     def hash_index(self, key):
@@ -81,8 +92,8 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
-
+        a = self.hash_index(key)
+        self.storage[a] = value
 
     def delete(self, key):
         """
@@ -92,7 +103,8 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
+        a = self.hash_index(key)
+        self.storage[a] = None
 
 
     def get(self, key):
@@ -103,7 +115,8 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
+        a = self.hash_index(key)
+        return self.storage[a]
 
 
     def resize(self, new_capacity):
@@ -114,7 +127,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
-
+        pass
 
 
 if __name__ == "__main__":
