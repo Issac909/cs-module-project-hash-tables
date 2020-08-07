@@ -4,7 +4,7 @@ For expensive operations, caching the results in a lookup table speeds
 future queries.
 
 The lookup table can be built in advance by iterating over all values in
-the _domain_ of the function and recording the results.
+the scope of the function and recording the results.W
 
 Or, more lazily, can be build as the individual values are passed in.
 
